@@ -1,0 +1,34 @@
+# Copy this to ~/stacks/blog/docker-compose.yml on the server.
+#
+#   mkdir -p ~/stacks/blog
+#   cp deploy/docker-compose.yml deploy/build.sh ~/stacks/blog/
+#   chmod +x ~/stacks/blog/build.sh
+#   # set REPO below, then:
+#   docker compose -f ~/stacks/blog/docker-compose.yml up -d
+
+services:
+  builder:
+    image: alpine:3.20
+    container_name: site-builder
+    restart: unless-stopped
+    environment:
+      # ---- the only line you must edit ----
+      REPO: "https://github.com/YOURNAME/site.git"
+      BRANCH: "main"
+      INTERVAL: "120"        # seconds between checks
+      HUGO_VERSION: "0.152.0"
+    volumes:
+      - ./build.sh:/build.sh:ro
+      - site:/out            # built html, shared with caddy
+      - src:/src             # the git checkout
+      - tools:/tools         # cached hugo binary
+    entrypoint: ["/bin/sh", "/build.sh"]
+    mem_limit: 512m
+    cpus: 0.5
+    pids_limit: 200
+
+volumes:
+  site:
+    name: site
+  src:
+  tools:

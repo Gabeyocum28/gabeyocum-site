@@ -1,0 +1,173 @@
+/* ------------------------------------------------------------------
+   PLACEHOLDER STYLES
+
+   Deliberately plain. This file is the only thing that needs to change
+   to redesign the site — the HTML in layouts/ is semantic and neutral.
+   ------------------------------------------------------------------ */
+
+:root {
+  --ink: #1a1a1a;
+  --paper: #ffffff;
+  --muted: #6b6b6b;
+  --rule: #e2e2e2;
+  --link: #1a4fd8;
+  --measure: 42rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ink: #e8e8e8;
+    --paper: #141414;
+    --muted: #999999;
+    --rule: #2e2e2e;
+    --link: #7aa2f7;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  max-width: var(--measure);
+  background: var(--paper);
+  color: var(--ink);
+  font: 17px/1.65 ui-serif, Georgia, "Times New Roman", serif;
+  -webkit-text-size-adjust: 100%;
+}
+
+a { color: var(--link); }
+
+/* header ---------------------------------------------------------- */
+
+.site-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 1.25rem;
+  padding: 2.5rem 0 1.25rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.site-name {
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.site-header nav { margin-left: auto; display: flex; gap: 1.25rem; }
+.site-header nav a { text-decoration: none; }
+.site-header nav a:hover { text-decoration: underline; }
+
+/* home ------------------------------------------------------------ */
+
+.intro { padding: 2.5rem 0 1rem; }
+.intro h1 { margin: 0 0 0.5rem; font-size: 2rem; line-height: 1.15; }
+.tagline { margin: 0; color: var(--muted); }
+
+.posts h2,
+.intro + .posts h2 {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  margin: 2.5rem 0 0.75rem;
+}
+
+.post-list { list-style: none; margin: 0; padding: 0; }
+.post-list li { padding: 0.9rem 0; border-bottom: 1px solid var(--rule); }
+.post-list a { text-decoration: none; display: flex; flex-wrap: wrap; gap: 0.25rem 1rem; }
+.post-list a:hover .post-title { text-decoration: underline; }
+.post-list time {
+  color: var(--muted);
+  font-family: ui-monospace, monospace;
+  font-size: 0.8rem;
+  flex: none;
+  min-width: 7rem;
+}
+.post-title { color: var(--ink); }
+.post-summary { margin: 0.35rem 0 0 8rem; color: var(--muted); font-size: 0.95rem; }
+.empty { color: var(--muted); }
+
+/* post ------------------------------------------------------------ */
+
+.post-header { padding: 2.5rem 0 0.5rem; }
+.post-header h1 { margin: 0 0 0.4rem; font-size: 2rem; line-height: 1.2; }
+.post-header time {
+  color: var(--muted);
+  font-family: ui-monospace, monospace;
+  font-size: 0.8rem;
+}
+
+.post h2 { margin-top: 2rem; font-size: 1.3rem; }
+.post pre {
+  overflow-x: auto;
+  padding: 1rem;
+  border: 1px solid var(--rule);
+  font-size: 0.85rem;
+}
+.post code { font-family: ui-monospace, monospace; font-size: 0.9em; }
+.post img { max-width: 100%; height: auto; }
+.post blockquote {
+  margin: 1.5rem 0;
+  padding-left: 1rem;
+  border-left: 2px solid var(--rule);
+  color: var(--muted);
+}
+
+/* projects -------------------------------------------------------- */
+
+.project-list { list-style: none; margin: 1rem 0 0; padding: 0; }
+
+.project { padding: 1.5rem 0; border-bottom: 1px solid var(--rule); }
+
+.project-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 0.75rem;
+}
+
+.project-name { font-size: 1.25rem; font-weight: 700; }
+a.project-name { color: var(--link); text-decoration: none; }
+a.project-name:hover { text-decoration: underline; }
+
+.project-status {
+  font-family: ui-monospace, monospace;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  border: 1px solid var(--rule);
+  padding: 0.1rem 0.4rem;
+}
+
+.project-summary { margin: 0.5rem 0 0; color: var(--muted); }
+
+.stack {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0.75rem 0 0;
+  padding: 0;
+  font-family: ui-monospace, monospace;
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+.stack li::after { content: " ·"; }
+.stack li:last-child::after { content: ""; }
+
+/* footer ---------------------------------------------------------- */
+
+.site-footer {
+  margin-top: 4rem;
+  padding: 1.25rem 0 3rem;
+  border-top: 1px solid var(--rule);
+  display: flex;
+  gap: 1.25rem;
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.8rem;
+  color: var(--muted);
+}

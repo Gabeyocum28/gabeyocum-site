@@ -1,0 +1,32 @@
+baseURL = "https://gabeyocum.com/"
+languageCode = "en-us"
+title = "Gabe Yocum"
+enableRobotsTXT = true
+
+# Posts land in /posts/<slug>/
+[permalinks]
+  posts = "/posts/:slug/"
+
+[params]
+  description = "Applied and computational mathematics, automation engineering, and independent projects."
+  author = "Gabe Yocum"
+  # Shown under the name on the home page.
+  tagline = "Applied math at BYU. I build automation systems and a steady stream of side projects."
+
+[markup.goldmark.renderer]
+  # Allow raw HTML inside markdown posts (diagrams, embeds).
+  unsafe = true
+
+[markup.highlight]
+  noClasses = false
+  style = "github"
+
+[menu]
+  [[menu.main]]
+    name = "Writing"
+    url = "/"
+    weight = 1
+  [[menu.main]]
+    name = "Projects"
+    url = "/projects/"
+    weight = 2

@@ -1,0 +1,47 @@
+# Every project on /projects/ comes from this file.
+# To add one, append an entry. Nothing else needs to change.
+#
+#   name:    display name
+#   status:  live | building | soon
+#   url:     where it points (leave empty for no link yet)
+#   summary: one or two sentences
+#   stack:   list of technologies
+
+- name: polyrhythmd
+  status: live
+  url: ""
+  summary: >
+    Letterboxd, but for music. Rate and review albums, follow what your friends
+    are listening to, and argue about it in public.
+  stack: [React, Express, MongoDB, Spotify API, WebSockets]
+
+- name: WorkAdventure
+  status: live
+  url: ""
+  summary: >
+    A self-hosted virtual world where you walk a pixel-art map and fall into
+    video calls by bumping into people.
+  stack: [Self-hosted, WebRTC, Docker]
+
+- name: OfficeHours AI
+  status: building
+  url: ""
+  summary: >
+    Office hours with a 3D avatar that has read the syllabus. Upload the course
+    materials, then talk to it out loud over a real call interface.
+  stack: [Flask, Three.js, OpenAI, Redis, Web Speech]
+
+- name: Essencia
+  status: building
+  url: ""
+  summary: >
+    An iOS app finding its way to the browser. Download links and a web version.
+  stack: [iOS, Swift, Web port]
+
+- name: Agents & Automation
+  status: live
+  url: ""
+  summary: >
+    Self-hosted n8n workflows wiring CRMs, databases and chat together, with a
+    Postgres warehouse underneath.
+  stack: [n8n, Postgres, ELT, Docker]

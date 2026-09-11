@@ -1,0 +1,23 @@
+# Replaces ~/stacks/caddy/Caddyfile
+#
+# The blog is static files, so Caddy serves them directly — no nginx needed.
+# The `hub` container can be removed once this is in place:
+#     docker compose -f ~/stacks/hub/docker-compose.yml down
+
+gabeyocum.com, www.gabeyocum.com {
+	root * /srv
+	file_server
+	encode zstd gzip
+
+	handle_errors {
+		rewrite * /404.html
+		file_server
+	}
+}
+
+# Future projects follow this pattern — each its own container on the `web`
+# network, reachable by container name:
+#
+# polyrhythmd.gabeyocum.com {
+# 	reverse_proxy polyrhythmd:3000
+# }

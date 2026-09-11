@@ -1,0 +1,28 @@
+{{ define "main" }}
+
+  <section class="intro">
+    <h1>{{ .Site.Title }}</h1>
+    {{ with .Site.Params.tagline }}<p class="tagline">{{ . }}</p>{{ end }}
+  </section>
+
+  <section class="posts">
+    <h2>Writing</h2>
+    {{ $posts := where .Site.RegularPages "Section" "posts" }}
+    {{ if $posts }}
+      <ul class="post-list">
+        {{ range $posts.ByDate.Reverse }}
+          <li>
+            <a href="{{ .RelPermalink }}">
+              <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+              <span class="post-title">{{ .Title }}</span>
+            </a>
+            {{ with .Description }}<p class="post-summary">{{ . }}</p>{{ end }}
+          </li>
+        {{ end }}
+      </ul>
+    {{ else }}
+      <p class="empty">No posts yet.</p>
+    {{ end }}
+  </section>
+
+{{ end }}
