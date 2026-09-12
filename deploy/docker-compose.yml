@@ -8,12 +8,12 @@
 
 services:
   builder:
-    image: alpine:3.20
+    image: debian:stable-slim
     container_name: site-builder
     restart: unless-stopped
     environment:
       # ---- the only line you must edit ----
-      REPO: "https://github.com/YOURNAME/site.git"
+      REPO: "https://github.com/Gabeyocum28/gabeyocum-site.git"
       BRANCH: "main"
       INTERVAL: "120"        # seconds between checks
       HUGO_VERSION: "0.152.0"
