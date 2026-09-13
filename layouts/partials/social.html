@@ -1,0 +1,5 @@
+{{- with .Site.Params.social -}}
+{{ with .email }}<a href="mailto:{{ . }}">Email</a>{{ end }}
+{{ with .github }}<a href="{{ . }}" rel="me noopener">GitHub</a>{{ end }}
+{{ with .linkedin }}<a href="{{ . }}" rel="me noopener">LinkedIn</a>{{ end }}
+{{- end -}}

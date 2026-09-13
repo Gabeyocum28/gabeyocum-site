@@ -1,0 +1,20 @@
+{{ define "main" }}
+  <article class="about">
+    <header class="page-header">
+      <h1>{{ .Title }}</h1>
+    </header>
+    <div class="prose">
+      {{ .Content }}
+    </div>
+    <section class="contact-block">
+      {{ partial "section-label.html" (dict "num" "→" "title" "Get in touch") }}
+      <ul class="contact-list">
+        {{ with .Site.Params.social }}
+          {{ with .email }}<li><span class="contact-key">Email</span><a href="mailto:{{ . }}">{{ . }}</a></li>{{ end }}
+          {{ with .github }}<li><span class="contact-key">GitHub</span><a href="{{ . }}" rel="me noopener">{{ . | replaceRE "^https?://" "" }}</a></li>{{ end }}
+          {{ with .linkedin }}<li><span class="contact-key">LinkedIn</span><a href="{{ . }}" rel="me noopener">{{ . | replaceRE "^https?://(www\\.)?" "" | replaceRE "/$" "" }}</a></li>{{ end }}
+        {{ end }}
+      </ul>
+    </section>
+  </article>
+{{ end }}

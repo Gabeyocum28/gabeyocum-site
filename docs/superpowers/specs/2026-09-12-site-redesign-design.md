@@ -44,7 +44,7 @@ equally.
 Project frontmatter:
 
 ```yaml
-title, date, status (live|building|soon), url, stack (list), featured (bool),
+title, date, status (live|building|soon), link, stack (list), featured (bool),
 weight (int), description
 ```
 

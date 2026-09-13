@@ -1,0 +1,19 @@
+{{ define "main" }}
+  <article class="project-page">
+    <header class="page-header">
+      <p class="crumb"><a href="{{ "/projects/" | relURL }}">Projects</a></p>
+      <div class="project-head">
+        <h1>{{ .Title }}</h1>
+        <span class="status status-{{ .Params.status }}">{{ .Params.status }}</span>
+      </div>
+      {{ with .Description }}<p class="lede">{{ . }}</p>{{ end }}
+      <div class="project-meta">
+        {{ with .Params.stack }}<ul class="stack">{{ range . }}<li>{{ . }}</li>{{ end }}</ul>{{ end }}
+        {{ with .Params.link }}<a class="button" href="{{ . }}" rel="noopener">Visit {{ .  | replaceRE "^https?://" "" }} ↗</a>{{ end }}
+      </div>
+    </header>
+    <div class="prose">
+      {{ .Content }}
+    </div>
+  </article>
+{{ end }}

@@ -5,10 +5,12 @@ Ampere A1 instance.
 
 ```
 content/posts/      blog posts (markdown)
-content/projects/   copy for the /projects page
-data/projects.yaml  the project list itself
-layouts/            html templates
+content/projects/   one markdown file per project
+content/about.md    the About page
+layouts/            html templates and partials
 static/css/main.css all styling lives here
+static/fonts/       self-hosted IBM Plex Sans / Mono
+static/vendor/katex KaTeX stylesheet and fonts (math is rendered at build time)
 deploy/             server-side build pipeline
 ```
 
@@ -23,10 +25,14 @@ title: "Post Title"
 date: 2026-09-11
 description: "One sentence, shown on the home page and in RSS."
 draft: false
+math: false
 ---
 
 Body goes here.
 ```
+
+Set `math: true` to load the KaTeX stylesheet. Then `$...$` is inline math and
+`$$...$$` is display math, rendered to HTML when the site builds.
 
 `draft: true` keeps it out of the build. Filename becomes the URL:
 `content/posts/my-post.md` → `/posts/my-post/`
@@ -47,8 +53,30 @@ That's the entire contract. Rules worth following:
 - Set `draft: true` for anything that needs review before going live
 - Never edit `public/` — it's generated and gitignored
 
-To add a project, append an entry to `data/projects.yaml`. No other file
-changes.
+## Adding a project
+
+Add a markdown file at `content/projects/<slug>.md`:
+
+```markdown
+---
+title: "Project Name"
+date: 2026-09-11
+description: "One or two sentences, shown on the card."
+status: live          # live | building | soon
+link: ""              # live URL, or empty for no link yet
+stack: [React, Postgres]
+featured: true        # show on the home page (top three by weight)
+weight: 1             # sort order, lower first
+---
+
+Longer writeup goes here. Can be empty.
+```
+
+The card grid on `/projects/` and the home page reads these files. Nothing
+else needs to change.
+
+Contact links (email, GitHub, LinkedIn) live in `hugo.toml` under
+`[params.social]` and are rendered on the home page, About page and footer.
 
 ## Local preview
 

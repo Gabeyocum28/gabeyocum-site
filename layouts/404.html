@@ -1,0 +1,12 @@
+{{ define "main" }}
+  <section class="not-found">
+    <p class="hero-kicker">404</p>
+    <h1>Undefined at this point.</h1>
+    <p class="lede">The page you asked for isn't in the domain. Try one of these instead.</p>
+    <nav class="hero-links" aria-label="Site">
+      <a href="{{ "/" | relURL }}">Home</a>
+      <a href="{{ "/posts/" | relURL }}">Writing</a>
+      <a href="{{ "/projects/" | relURL }}">Projects</a>
+    </nav>
+  </section>
+{{ end }}

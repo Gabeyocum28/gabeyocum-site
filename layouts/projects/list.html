@@ -1,31 +1,10 @@
+{{ define "main-class" }}container container-wide{{ end }}
 {{ define "main" }}
-
-  <section class="intro">
+  <header class="page-header">
     <h1>{{ .Title }}</h1>
-    {{ with .Content }}{{ . }}{{ end }}
-  </section>
-
-  <ul class="project-list">
-    {{ range .Site.Data.projects }}
-      <li class="project" data-status="{{ .status }}">
-        <div class="project-head">
-          {{ if .url }}
-            <a class="project-name" href="{{ .url }}">{{ .name }}</a>
-          {{ else }}
-            <span class="project-name">{{ .name }}</span>
-          {{ end }}
-          <span class="project-status status-{{ .status }}">{{ .status }}</span>
-        </div>
-
-        {{ with .summary }}<p class="project-summary">{{ . }}</p>{{ end }}
-
-        {{ with .stack }}
-          <ul class="stack">
-            {{ range . }}<li>{{ . }}</li>{{ end }}
-          </ul>
-        {{ end }}
-      </li>
-    {{ end }}
+    {{ .Content }}
+  </header>
+  <ul class="project-grid">
+    {{ range .Pages.ByWeight }}{{ partial "project-card.html" . }}{{ end }}
   </ul>
-
 {{ end }}

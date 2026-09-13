@@ -6,5 +6,7 @@
   </header>
   {{ with .Pages }}
     {{ partial "post-list.html" .ByDate.Reverse }}
+  {{ else }}
+    <p class="empty">No posts yet.</p>
   {{ end }}
 {{ end }}

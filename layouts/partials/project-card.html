@@ -1,0 +1,15 @@
+<li class="project-card" data-status="{{ .Params.status }}">
+  <a class="project-card-link" href="{{ .RelPermalink }}">
+    <div class="project-head">
+      <h3 class="project-name">{{ .Title }}</h3>
+      <span class="status status-{{ .Params.status }}">{{ .Params.status }}</span>
+    </div>
+    {{ with .Description }}<p class="project-summary">{{ . }}</p>{{ end }}
+  </a>
+  <div class="project-foot">
+    {{ with .Params.stack }}
+      <ul class="stack">{{ range . }}<li>{{ . }}</li>{{ end }}</ul>
+    {{ end }}
+    {{ with .Params.link }}<a class="visit" href="{{ . }}" rel="noopener">Visit ↗</a>{{ end }}
+  </div>
+</li>
