@@ -2,7 +2,7 @@
 title: "Typesetting Math and Code on This Site"
 date: 2026-09-12
 description: "A short demo of LaTeX rendered at build time, plus syntax-highlighted code."
-draft: true
+draft: false
 math: true
 ---
 
