@@ -75,6 +75,15 @@ Longer writeup goes here. Can be empty.
 The card grid on `/projects/` and the home page reads these files. Nothing
 else needs to change.
 
+### Live status badges
+
+Projects with a `link` get their badge from a real health check, not the
+frontmatter. The builder container polls each link every `STATUS_INTERVAL`
+seconds (default 60) and writes `/status.json` next to the built site; the
+project cards fetch it and show LIVE (2xx/3xx) or DOWN. Projects without a
+link keep their `status` from frontmatter. The list of links comes from
+`/projects/index.json`, which Hugo generates.
+
 Contact links (email, GitHub, LinkedIn) live in `hugo.toml` under
 `[params.social]` and are rendered on the home page, About page and footer.
 
@@ -102,6 +111,14 @@ docker logs -f site-builder
 Then point Caddy at the built output (see `deploy/Caddyfile`) and reload.
 
 After that, deployment is `git push`.
+
+If `deploy/build.sh` changes, copy it to the server again and restart the
+builder:
+
+```bash
+cp deploy/build.sh ~/stacks/blog/build.sh
+docker compose -f ~/stacks/blog/docker-compose.yml restart builder
+```
 
 ## Why Hugo
 

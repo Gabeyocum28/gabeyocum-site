@@ -1,5 +1,5 @@
 {{ define "main" }}
-  <article class="project-page">
+  <article class="project-page" data-slug="{{ .File.ContentBaseName }}"{{ with .Params.link }} data-link="{{ . }}"{{ end }}>
     <header class="page-header">
       <p class="crumb"><a href="{{ "/projects/" | relURL }}">Projects</a></p>
       <div class="project-head">

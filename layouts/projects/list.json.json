@@ -1,0 +1,7 @@
+{{- $items := slice -}}
+{{- range .Pages -}}
+  {{- if .Params.link -}}
+    {{- $items = $items | append (dict "slug" .File.ContentBaseName "link" .Params.link) -}}
+  {{- end -}}
+{{- end -}}
+{{- dict "projects" $items | jsonify -}}

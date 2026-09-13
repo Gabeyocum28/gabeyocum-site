@@ -21,3 +21,26 @@
     });
   })();
 </script>
+<script>
+  (function () {
+    var els = document.querySelectorAll('[data-slug][data-link]');
+    if (!els.length) return;
+    fetch('/status.json', { cache: 'no-store' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (data) {
+        if (!data || !data.projects) return;
+        els.forEach(function (el) {
+          var s = data.projects[el.getAttribute('data-slug')];
+          if (!s) return;
+          var badge = el.querySelector('.status');
+          if (!badge) return;
+          var up = s.up === true;
+          badge.className = 'status status-' + (up ? 'live' : 'down');
+          badge.textContent = up ? 'live' : 'down';
+          badge.title = up ? 'Responding' : 'Not responding';
+          if (data.checked) badge.title += ' as of ' + new Date(data.checked).toLocaleString();
+        });
+      })
+      .catch(function () {});
+  })();
+</script>

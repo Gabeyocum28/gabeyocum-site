@@ -1,4 +1,4 @@
-<li class="project-card" data-status="{{ .Params.status }}">
+<li class="project-card" data-status="{{ .Params.status }}" data-slug="{{ .File.ContentBaseName }}"{{ with .Params.link }} data-link="{{ . }}"{{ end }}>
   <a class="project-card-link" href="{{ .RelPermalink }}">
     <div class="project-head">
       <h3 class="project-name">{{ .Title }}</h3>

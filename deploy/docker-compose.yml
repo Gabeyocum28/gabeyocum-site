@@ -17,6 +17,7 @@ services:
       BRANCH: "main"
       INTERVAL: "120"        # seconds between checks
       HUGO_VERSION: "0.152.0"
+      STATUS_INTERVAL: "60"  # seconds between project health checks
     volumes:
       - ./build.sh:/build.sh:ro
       - site:/out            # built html, shared with caddy

@@ -5,6 +5,7 @@ set -eu
 : "${BRANCH:=main}"
 : "${INTERVAL:=120}"
 : "${HUGO_VERSION:=0.152.0}"
+: "${STATUS_INTERVAL:=60}"
 
 case "$(uname -m)" in
   aarch64|arm64) HUGO_ARCH="linux-arm64" ;;
@@ -29,6 +30,34 @@ if ! /tools/hugo version 2>/dev/null | grep -q "v${HUGO_VERSION}"; then
   /tools/hugo version
 fi
 
+# Poll every linked project (listed by hugo in /out/projects/index.json) and
+# write /out/status.json. The site's JS reads it to flip the LIVE/DOWN badges.
+check_status() {
+  list="/out/projects/index.json"
+  [ -f "$list" ] || return 0
+  tmp="/out/status.json.tmp"
+  first=1
+  printf '{"checked":"%s","projects":{' "$(date -u +%FT%TZ)" > "$tmp"
+  # one "slug link" pair per line
+  { tr '{' '\n' < "$list"; echo; } | sed -n 's/.*"link":"\([^"]*\)".*"slug":"\([^"]*\)".*/\2 \1/p' |
+  while read -r slug link; do
+    code="$(curl -sS -o /dev/null -m 8 -L -w '%{http_code}' "$link" 2>/dev/null || echo 000)"
+    case "$code" in 2*|3*) up=true ;; *) up=false ;; esac
+    [ "$first" -eq 1 ] || printf ',' >> "$tmp"
+    first=0
+    printf '"%s":{"up":%s,"code":"%s"}' "$slug" "$up" "$code" >> "$tmp"
+  done
+  printf '}}' >> "$tmp"
+  mv "$tmp" /out/status.json
+}
+
+status_loop() {
+  while true; do
+    check_status
+    sleep "$STATUS_INTERVAL"
+  done
+}
+
 build() {
   if /tools/hugo --source /src --destination /out --gc --minify --cleanDestinationDir; then
     echo "[deploy] built $(date -u +%FT%TZ) $(git -C /src rev-parse --short HEAD)"
@@ -46,6 +75,8 @@ elif [ ! -f /out/index.html ]; then
   echo "[deploy] output empty, rebuilding"
   build
 fi
+
+status_loop &
 
 while true; do
   sleep "$INTERVAL"
