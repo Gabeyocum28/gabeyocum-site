@@ -2,7 +2,7 @@
   <a class="project-card-link" href="{{ .RelPermalink }}">
     <div class="project-head">
       <h3 class="project-name">{{ .Title }}</h3>
-      <span class="status status-{{ .Params.status }}">{{ .Params.status }}</span>
+      {{ if .Params.link }}<span class="status status-{{ .Params.status }}">{{ .Params.status }}</span>{{ else }}<span class="status status-down">not running</span>{{ end }}
     </div>
     {{ with .Description }}<p class="project-summary">{{ . }}</p>{{ end }}
   </a>

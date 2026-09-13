@@ -4,7 +4,7 @@
       <p class="crumb"><a href="{{ "/projects/" | relURL }}">Projects</a></p>
       <div class="project-head">
         <h1>{{ .Title }}</h1>
-        <span class="status status-{{ .Params.status }}">{{ .Params.status }}</span>
+        {{ if .Params.link }}<span class="status status-{{ .Params.status }}">{{ .Params.status }}</span>{{ else }}<span class="status status-down">not running</span>{{ end }}
       </div>
       {{ with .Description }}<p class="lede">{{ . }}</p>{{ end }}
       <div class="project-meta">

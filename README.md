@@ -81,7 +81,7 @@ Projects with a `link` get their badge from a real health check, not the
 frontmatter. The builder container polls each link every `STATUS_INTERVAL`
 seconds (default 60) and writes `/status.json` next to the built site; the
 project cards fetch it and show LIVE (2xx/3xx) or DOWN. Projects without a
-link keep their `status` from frontmatter. The list of links comes from
+link show a red "not running" badge, since there is nothing to check. The list of links comes from
 `/projects/index.json`, which Hugo generates.
 
 Contact links (email, GitHub, LinkedIn) live in `hugo.toml` under
